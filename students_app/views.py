@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .serializers import studentSerializers
-from.models import Students
+from.models import Receipting
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -11,10 +11,10 @@ class StudentsList(APIView):
     def authenticate(self, request):
         username = request.headers.get('Username')
         password = request.headers.get('Password')
-        return username == 'admin' and password == 'PWD'
+        return username == 'admin' and password == 'P4$$W0RD'
     def get(self,request):
 
-        students = Students.objects.all()
+        students = Receipting.objects.all()
         serializer= studentSerializers(students,many=True)
         return Response(serializer.data)
 
@@ -33,10 +33,10 @@ class StudentByID(APIView):
     def authenticate(self, request):
         username = request.headers.get('Username')
         password = request.headers.get('Password')
-        return username == 'admin' and password == 'PWD'
+        return username == 'admin' and password == 'P4$$W0RD'
 
     def get_object(self,pk):
-        return Students.objects.get(pk=pk)
+        return Receipting.objects.get(pk=pk)
 
     def get(self,request,pk):
         students_obj = self.get_object(pk)
@@ -63,6 +63,3 @@ class StudentByID(APIView):
         students_obj=self.get_object(pk)
         students_obj.delete()
         return  Response( status=status.HTTP_204_NO_CONTENT)
-
-    def tried(self):
-        print('ggggggg')

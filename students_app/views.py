@@ -8,7 +8,6 @@ from rest_framework import status
 class StudentsList(APIView):
 
     def get(self,request):
-
         students = Students.objects.all()
         serializer= studentSerializers(students,many=True)
         return Response(serializer.data)
@@ -21,7 +20,6 @@ class StudentsList(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class StudentByID(APIView):
-
     def get_object(self,pk):
         return Students.objects.get(pk=pk)
 
@@ -42,3 +40,5 @@ class StudentByID(APIView):
         students_obj=self.get_object(pk)
         students_obj.delete()
         return Response( status=status.HTTP_204_NO_CONTENT)
+    def tried(self):
+        print('ggggggg')
